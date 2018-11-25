@@ -3,7 +3,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     @user.token = generate_token(@user)
     if @user.save
-      render :json, status: 200
+      render json: @user, status: 200
     else
       render json: { errors: @user.errors.full_messages }, status: 422
     end
@@ -27,7 +27,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :username, :email, :password,
-                                 :password_confirmation, :token)
+    params.permit(:name, :username, :email, :password,
+                  :password_confirmation, :token)
   end
 end
