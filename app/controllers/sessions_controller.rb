@@ -6,5 +6,6 @@ class SessionsController < ApplicationController
       render json: user, status: 200
     else
       render json: { message: "Invalid E-mail or Password" }, status: 401
+    end
   end
 end
