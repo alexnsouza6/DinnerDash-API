@@ -1,10 +1,11 @@
 class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
+    @user.token = generate_token(@user)
     if @user.save
       render :json, status: 200
     else
-      render json: { errors: "Couldn't save user correctly" }, status: 422
+      render json: { errors: @user.errors.full_messages }, status: 422
     end
   end
 
@@ -27,6 +28,6 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:name, :username, :email, :password,
-                                 :password_confirmation)
+                                 :password_confirmation, :token)
   end
 end
