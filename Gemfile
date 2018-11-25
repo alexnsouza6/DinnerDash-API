@@ -38,6 +38,8 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.8'
   # factory_bot is a fixtures replacement with a straightforward definition syntax
   gem 'factory_bot_rails'
+  gem 'shoulda-matchers', '4.0.0.rc1'
+  gem 'rails-controller-testing' # If you are using Rails 5.x
 end
 
 group :development do
