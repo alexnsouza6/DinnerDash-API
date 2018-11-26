@@ -1,6 +1,10 @@
 class ApplicationController < ActionController::API
   include ActionController::HttpAuthentication::Token::ControllerMethods
 
+  def current_user
+    @current_user ||= authenticate_token
+  end
+
   protected
 
   def generate_token(user)
