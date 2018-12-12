@@ -10,7 +10,7 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user = User.find(params[:id])
+    @user = current_user
     if @user.update(user_params)
       render json: @user, status: 200
     else
@@ -19,7 +19,7 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    @user = User.find(params[:id])
+    @user = current_user
     @user.destroy
     render json: { message: "User successfully destroyed" }, status: 200
   end
@@ -27,7 +27,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.permit(:name, :username, :email, :password,
+    params.require(:user).permit(:name, :username, :email, :password,
                   :password_confirmation, :token)
   end
 end
